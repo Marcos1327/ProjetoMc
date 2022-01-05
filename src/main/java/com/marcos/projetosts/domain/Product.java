@@ -9,66 +9,74 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Categoria implements Serializable {
+public class Product implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	private Double price;
 	
-	@ManyToMany(mappedBy="categorias")
-	private List<Product> products = new ArrayList<>();
+	@ManyToMany
+	@JoinTable(name = "PRODUTO_CATEGORIA",
+	    joinColumns = @JoinColumn(name = "produto_id"),
+	    inverseJoinColumns = @JoinColumn(name = "categoria_id")
+	)
+	private List<Categoria> categorias = new ArrayList<>();
 	
-	
-	public Categoria() {
+	public Product() {
 	}
 
-
-	public Categoria(Integer id, String name) {
+	public Product(Integer id, String name, Double price) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.price = price;
 	}
-
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
-	public List<Product> getProducts() {
-		return products;
+	public Double getPrice() {
+		return price;
 	}
 
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
-	
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -78,12 +86,8 @@ public class Categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
 	}
 
-
-
-	
-	
 }
