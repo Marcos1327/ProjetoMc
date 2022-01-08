@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ItemPedido implements Serializable  {
@@ -16,6 +18,10 @@ public class ItemPedido implements Serializable  {
 	private Double desconto;
 	private Integer quantidade;
 	private Double preco;
+	
+	@ManyToOne
+	@JoinColumn(name="produto")
+	private Product product;
 	
     public ItemPedido() {
 	 }
