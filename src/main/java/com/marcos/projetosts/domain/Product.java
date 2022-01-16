@@ -42,7 +42,7 @@ public class Product implements Serializable {
 	private List<Categoria> categorias = new ArrayList<>();
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="id.product", cascade = CascadeType.ALL)
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Product() {

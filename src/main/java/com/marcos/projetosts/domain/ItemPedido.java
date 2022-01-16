@@ -19,9 +19,9 @@ public class ItemPedido implements Serializable  {
 	private Integer quantidade;
 	private Double preco;
 	
-	@ManyToOne
-	@JoinColumn(name="produto")
-	private Product product;
+	/*@ManyToOne
+	@JoinColumn(name="product")
+	private Product product;*/
 	
     public ItemPedido() {
 	 }
