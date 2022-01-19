@@ -14,6 +14,7 @@ import com.marcos.projetosts.domain.Categoria;
 import com.marcos.projetosts.domain.repositories.CategoriaRepository;
 import com.marcos.projetosts.domain.services.exceptions.DataIntegrityException;
 import com.marcos.projetosts.domain.services.exceptions.ObjectNotFoundException;
+import com.marcos.projetosts.dto.CategoriaDTO;
 
 @Service
 public class CategoriaService {
@@ -65,5 +66,9 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getName());
 	}
 }
