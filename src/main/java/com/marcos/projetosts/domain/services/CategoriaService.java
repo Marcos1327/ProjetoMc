@@ -15,6 +15,8 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 
+	// Método para Buscar no banco de dados / junto com o Resource
+	
 	public Categoria find(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -22,9 +24,18 @@ public class CategoriaService {
 
 	}
 	
+	// Método para Adicionar no banco de dados / junto com o Resource
+	
 	public Categoria insert(Categoria obj ) {
 		obj.setId(null);
 		return repo.save(obj);
 	}
 
+
+	// Método para Atualizar no banco de dados / junto com o Resource
+	
+	public Categoria update(Categoria obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
 }
