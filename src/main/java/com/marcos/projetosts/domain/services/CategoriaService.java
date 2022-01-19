@@ -1,5 +1,6 @@
 package com.marcos.projetosts.domain.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 	
+	// Método para Delete no banco de dados / junto com o Resource
 	
 	public void delete(Integer id) {
 		find(id);
@@ -51,5 +53,9 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
 		}
 		
+	}
+	
+	public List<Categoria> findAll(){
+		return repo.findAll();
 	}
 }
